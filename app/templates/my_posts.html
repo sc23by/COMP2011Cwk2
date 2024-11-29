@@ -1,0 +1,69 @@
+{% extends "base_user.html" %}
+{% block user_content %}
+<div class="container mt-4">
+    <h1 class="mb-4">My Posts</h1>
+
+    <!-- Filter Dropdown -->
+    <div class="mb-4">
+        <label for="filter-select" class="form-label"></label>
+        <select id="filter-select" class="form-select">
+            <option value="posts" {% if filter_type == 'posts' %}selected{% endif %}>My Posts</option>
+            <option value="comments" {% if filter_type == 'comments' %}selected{% endif %}>My Comments</option>
+        </select>
+    </div>
+
+    <hr>
+
+    {% if filter_type == 'posts' %}
+        <!-- My Posts View -->
+        {% if user_posts %}
+            {% for post in user_posts %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <strong>Posted on:</strong> {{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ post.content }}</p>
+                        <form method="post" action="{{ url_for('delete_post', post_id=post.id) }}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete Post</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div><p>You have not created any posts yet.</p></div>
+        {% endif %}
+
+    {% elif filter_type == 'comments' %}
+        <!-- My Comments View -->
+        {% if posts_with_comments %}
+            {% for item in posts_with_comments %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <strong>{{ item.post.author.username }}</strong>: {{ item.post.content }}
+                        <span class="text-muted float-end">Posted on {{ item.post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+                    </div>
+                    <div class="card-body">
+                        <h5>Your Comments:</h5>
+                        <ul class="list-group">
+                            {% for comment in item.comments %}
+                                <li class="list-group-item">
+                                    <p class="mb-1">{{ comment.content }}</p>
+                                    <small class="text-muted d-block">Commented on {{ comment.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+                                    <form method="post" action="{{ url_for('delete_comment', comment_id=comment.id) }}">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                        <button type="submit" class="btn btn-danger btn-sm mt-2">Delete Comment</button>
+                                    </form>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div><p>You have not commented on any posts yet.</p></div>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

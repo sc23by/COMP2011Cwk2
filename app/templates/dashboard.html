@@ -1,0 +1,92 @@
+{% extends "base_user.html" %}
+{% block user_content %}
+<h1>Dashboard</h1>
+
+<!-- Post Form -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Create a New Post</h5>
+        <form method="post" action="{{ url_for('dashboard') }}">
+            {{ post_form.hidden_tag() }}
+            <input type="hidden" name="form_type" value="post_form">
+            <div class="form-group mb-3">
+                {{ post_form.content.label(class="form-label") }}
+                {{ post_form.content(class="form-control") }}
+            </div>
+            <button type="submit" class="btn btn-primary">{{ post_form.submit.label.text }}</button>
+        </form>
+    </div>
+</div>
+
+<hr>
+
+<!-- Posts Section -->
+<h2 class="mb-3">Posts</h2>
+
+<!-- Filter Posts -->
+<div class="mb-3">
+    <label for="post-filter"></label>
+    <select id="post-filter" onchange="applyFilter()">
+        <option value="all" {% if filter_type == 'all' %}selected{% endif %}>All Posts</option>
+        <option value="following" {% if filter_type == 'following' %}selected{% endif %}>Following</option>
+    </select>
+</div>
+
+{% if posts %}
+    {% for post in posts %}
+        <div class="card mb-4" id="post-{{ post.post.id }}">
+            <div class="card-header">
+                <strong>{{ post.post.author.username }}</strong>
+                <span class="text-muted float-end">{{ post.post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ post.post.content }}</p>
+                
+                <!-- Like and Dislike Buttons -->
+                <div class="d-flex align-items-center mb-3">
+                    <button class="btn like-button {% if post.liked %}selected{% endif %}" data-post-id="{{ post.post.id }}">
+                        <i class="{% if post.liked %}fas{% else %}far{% endif %} fa-thumbs-up"></i>
+                    </button>
+                    <span class="me-3 like-count">{{ post.likes }}</span>
+
+                    <button class="btn dislike-button {% if post.disliked %}selected{% endif %}" data-post-id="{{ post.post.id }}">
+                        <i class="{% if post.disliked %}fas{% else %}far{% endif %} fa-thumbs-down"></i>
+                    </button>
+                    <span class="dislike-count">{{ post.dislikes }}</span>
+                </div>
+
+                <!-- Comments Section -->
+                <h5>Comments:</h5>
+                <ul class="list-group mb-3">
+                    {% for comment in post.post.comments %}
+                        <li class="list-group-item">
+                            <strong>{{ comment.author.username }}</strong>: {{ comment.content }}
+                            <small class="text-muted d-block">{{ comment.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Comment Form -->
+                <form method="post" action="{{ url_for('dashboard') }}">
+                    {{ comment_form.hidden_tag() }}
+                    <input type="hidden" name="form_type" value="comment_form">
+                    <input type="hidden" name="post_id" value="{{ post.post.id }}">
+                    <div class="form-group mb-3">
+                        {{ comment_form.content.label(class="form-label") }}
+                        {{ comment_form.content(class="form-control") }}
+                    </div>
+                    <button type="submit" class="btn btn-secondary btn-sm">{{ comment_form.submit.label.text }}</button>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div>
+        {% if filter_type == 'following' %}
+            You are not following anyone with posts.
+        {% else %}
+            There are no posts to display.
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock %}

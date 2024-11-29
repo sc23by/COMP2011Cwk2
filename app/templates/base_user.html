@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light w-100">
+        <div class="container-fluid">
+            
+            <!-- Left Navigation Links -->
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/my_posts' %}active{% endif %}" href="{{ url_for('my_posts') }}">Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/profile' %}active{% endif %}" href="{{ url_for('profile') }}">Profile</a>
+                </li>
+            </ul>
+
+            <!-- Centered Search Box -->
+            <div class="search-box mx-auto">
+                <input class="search-box-text"
+                    type="text" 
+                    id="user-search" 
+                    placeholder="Search for users..." 
+                >
+                <!-- Dropdown for search results -->
+                <ul class="search-box-results" id="search-results">
+                    <!-- Results will be inserted dynamically here -->
+                </ul>
+            </div>
+
+            <!-- Right Navigation Links -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+            
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        {% block user_content %}{% endblock %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base_guest.html" %}
+{% block guest_content %}
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow-lg" style="width: 400px;">
+        <h1 class="text-center mb-4">Register</h1>
+        
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="mb-3">
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <!-- Registration form -->
+        <form method="post">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group mb-3">
+                {{ form.username.label(class="form-label") }}
+                {{ form.username(class="form-control") }}
+                {% for error in form.username.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <!-- Username input -->
+            <div class="form-group mb-3">
+                {{ form.password.label(class="form-label") }}
+                {{ form.password(class="form-control") }}
+                {% for error in form.password.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <!-- Password input -->
+            <div class="form-group mb-3">
+                {{ form.confirm_password.label(class="form-label") }}
+                {{ form.confirm_password(class="form-control") }}
+                {% for error in form.confirm_password.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <!-- Submit button -->
+            <div class="text-center">
+                {{ form.submit(class="btn btn-primary btn-lg w-100") }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
