@@ -1,23 +1,24 @@
 /* Card styles */
 .card {
     background-color: #f8f9fa;
-    border: 1px none ;
-    border-radius: 10px
+    border: 1px none;
+    border-radius: 10px;
 }
 
 .search-box {
-    position: relative; 
-    display: inline-block; 
+    position: relative;
+    width: 600px;
+    max-width: 100%;
+    display: inline-block;
     margin-left: 20px;
 }
 
-
 .search-box-text {
-    width: 400px;
-    max-width: 100%; /* Prevent overflow on smaller screens */
-    border-radius: 2px; /* This makes the input rounded */
-    padding: 5px 15px;  /* Adds padding for better aesthetics */
-    border: 1px solid #ddd; /* Optional: Add a light border for visibility */
+    width: 600px;
+    max-width: 100%;
+    border-radius: 2px;
+    padding: 5px 15px;
+    border: 1px solid #ddd;
 }
 
 .search-box-results {
@@ -35,122 +36,114 @@
     border-bottom-left-radius: 2px;
 }
 
-/* General button styling */
 .follow-btn,
 .unfollow-btn {
-    padding: 5px 10px; /* Minimal padding */
-    font-size: 14px; /* Readable font size */
-    font-weight: normal; /* Regular font weight for simplicity */
-    border: 1px solid #ddd; /* Subtle border */
-    border-radius: 2px; /* Slight rounding of edges */
-    cursor: pointer; /* Pointer cursor for interactivity */
-    background-color: white; /* Neutral background */
-    color: #333; /* Dark text color */
-    transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth hover effects */
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: normal;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: white;
+    color: #333;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Follow button */
 .follow-btn {
-    background-color: #007bff; /* Light blue */
+    background-color: #007bff;
     color: white;
-    border: none; /* No border for follow button */
+    border: none;
 }
 
 .follow-btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3;
 }
 
-/* Unfollow button */
 .unfollow-btn {
-    background-color: #6c757d; /* Gray background */
+    background-color: #6c757d;
     color: white;
-    border: none; /* No border for unfollow button */
+    border: none;
 }
 
 .unfollow-btn:hover {
-    background-color: #5a6268; /* Darker gray on hover */
+    background-color: #5a6268;
 }
 
-/* Alignment of the button to the right of the search box */
 .search-box-results {
-    display: none; /* Initially hidden */
+    display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%; /* Matches search box width */
-    border: 1px solid #ddd; /* Light border */
-    background-color: white; /* White background */
-    z-index: 10; /* Keeps it on top */
-    list-style: none; /* Remove bullet points */
+    width: 100%;
+    border: 1px solid #ddd;
+    background-color: white;
+    z-index: 10;
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
 .search-box-results li {
     display: flex;
-    justify-content: space-between; /* Align username to the left and button to the right */
-    align-items: center; /* Vertically center content */
+    justify-content: space-between;
+    align-items: center;
     padding: 5px 10px;
-    border-bottom: 1px solid #f1f1f1; /* Light separator between results */
+    border-bottom: 1px solid #f1f1f1;
 }
 
 .search-box-results li:last-child {
-    border-bottom: none; /* Remove border for the last item */
+    border-bottom: none;
 }
 
 button:focus, .btn:focus {
-    outline: none; /* Remove default blue outline */
-    box-shadow: none; /* Remove the glowing blue shadow */
+    outline: none;
+    box-shadow: none;
 }
 
-/* Toggle button styling */
 .toggle-btn {
-    background-color: #f8f9fa; /* Neutral light gray */
-    border: 1px solid #ddd; /* Subtle border */
-    border-radius: 5px; /* Rounded edges */
-    padding: 8px 12px; /* Comfortable padding */
-    font-size: 16px; /* Readable font size */
-    font-weight: 500; /* Medium font weight for a balanced look */
-    font-family: 'Roboto', 'Open Sans', Arial, sans-serif; /* Modern sans-serif fonts */
-    color: #333; /* Neutral dark text */
-    cursor: pointer; /* Pointer cursor for interactivity */
-    transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth hover effects */
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Roboto', 'Open Sans', Arial, sans-serif;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
     display: inline-flex;
-    align-items: center; /* Vertically center icon and text */
+    align-items: center;
 }
 
 .toggle-btn i {
-    font-size: 14px; /* Slightly smaller icon size */
-    margin-left: 8px; /* Space between text and icon */
-    transition: transform 0.3s ease; /* Smooth rotation effect */
+    font-size: 14px;
+    margin-left: 8px;
+    transition: transform 0.3s ease;
 }
 
 .toggle-btn[aria-expanded="true"] i {
-    transform: rotate(180deg); /* Rotate the chevron icon when expanded */
+    transform: rotate(180deg);
 }
 
 .toggle-btn:hover {
-    background-color: #e2e6ea; /* Subtle hover effect */
-    border-color: #ccc; /* Slightly darker border on hover */
+    background-color: #e2e6ea;
+    border-color: #ccc;
 }
 
-/* Optional: General font styling for the entire page (if needed) */
 body {
-    font-family: 'Roboto', 'Open Sans', Arial, sans-serif; /* Consistent font styling */
+    font-family: 'Roboto', 'Open Sans', Arial, sans-serif;
 }
 
-/* Scrollable lists for followers/following */
 .list-group {
     max-height: 200px;
     overflow-y: auto;
-    border: 1px solid #ddd; /* Border to separate the list visually */
-    border-radius: 5px; /* Rounded edges for a clean look */
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-/* List items */
 .list-group-item {
-    border: none; /* No internal borders */
-    padding: 10px; /* Comfortable spacing */
-    font-size: 14px; /* Slightly smaller font for a cleaner list */
-    font-family: 'Roboto', 'Open Sans', Arial, sans-serif; /* Consistent with toggle button */
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    font-family: 'Roboto', 'Open Sans', Arial, sans-serif;
 }
