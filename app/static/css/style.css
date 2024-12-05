@@ -5,21 +5,29 @@
     border-radius: 10px;
 }
 
+.navbar-collapse {
+    display: flex;
+    flex-wrap: wrap; /* Allow children to wrap onto new rows */
+    align-items: center; /* Vertically align items */
+}
+
+
 .search-box {
     position: relative;
-    width: 600px;
-    max-width: 100%;
-    display: inline-block;
+    flex-grow: 1; /* Allow the search box to grow or shrink dynamically */
+    max-width: 600px; /* Optional: Restrict the maximum width */
     margin-left: 20px;
+    flex-basis: 100%; /* Take full width in a new row when wrapping */
 }
 
 .search-box-text {
-    width: 600px;
-    max-width: 100%;
+    width: 100%; /* Ensure the input takes up the full width of its container */
     border-radius: 2px;
     padding: 5px 15px;
     border: 1px solid #ddd;
+    box-sizing: border-box; /* Prevent padding from affecting width */
 }
+
 
 .search-box-results {
     display: none;
